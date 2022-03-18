@@ -1,21 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
+import { AiOutlineSetting } from 'react-icons/ai';
 
-const ProfileHeader = ({ user }) => {
-    console.log(user);
+const ProfileHeader = (props) => {
     return (
         <div className='w-full flex md:flex-row flex-col justify-evenly py-5 items-center md:gap-20 gap-5'>
             <div className='flex items-center '>
                 <div className='flex flex-col md:flex-row items-center gap-3 text-center'>
-                    <img className='rounded-full' src={user.photoURL} alt={user.displayName} />
+                    <img className='rounded-full' src={props.user.photoURL} alt={props.user.displayName} />
                     <div>
-                        <p className='text-2xl font-bold'>{user.displayName}</p>
-                        <div className='text-base'>{user.email}</div>
+                        <p className='text-2xl font-bold'>{props.user.displayName}</p>
+                        <div className='text-base'>{props.user.email}</div>
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col md:flex-row md:gap-5 gap-2'>
-                <button className='px-3 py-2 bg-indigo-600 text-white rounded-lg'>Add your Resort</button>
-                <button className='px-3 py-2 bg-indigo-600 text-white rounded-lg'>Edit Profile</button>
+            <div className='flex flex-col md:flex-row md:gap-5 gap-2 items-center'>
+                <button onClick={() => { props.setAddResort(!props.addResort); props.setEditProfile(false); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg'>Add your Resort</button>
+                <button onClick={() => { props.setAddResort(false); props.setEditProfile(!props.editProfile); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg'> Edit Profile</button>
+                <AiOutlineSetting className='text-3xl cursor-pointer' onClick={() => { props.setAddResort(false); props.setEditProfile(false); props.setSettings(!props.settings) }} />
             </div>
         </div>
     )

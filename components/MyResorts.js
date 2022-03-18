@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 const MyResorts = () => {
@@ -29,7 +30,7 @@ const MyResorts = () => {
         },
     ]
     return (
-        <div className='flex flex-col md:gap-6 flex-wrap w-96 md:w-full md:px-48 md:py-5'>
+        <div className='flex flex-col md:gap-6 flex-wrap w-[22rem] md:w-full md:px-48 md:py-5'>
             <p className='text-3xl font-semibold md:pl-24 py-3'>My Resorts</p>
             <div className='flex gap-3 flex-wrap w-full items-center justify-center'>
                 {myResort.map((resorts, id) => {

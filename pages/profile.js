@@ -4,9 +4,15 @@ import { getAuth, signOut } from "firebase/auth";
 import useFirebase from '../lib/useFirebase';
 import ProfileHeader from '../components/ProfileHeader';
 import ManageMyResorts from '../containers/ManageMyResorts';
+import Settings from '../containers/Settings';
 import MyResorts from '../components/MyResorts';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Profile = () => {
+    const [addResort, setAddResort] = useState(false)
+    const [editProfile, setEditProfile] = useState(false)
+    const [settings, setSettings] = useState(false)
 
     const { user } = useFirebase()
 
@@ -16,9 +22,7 @@ const Profile = () => {
     const handleSignout = () => {
         signOut(auth).then(() => {
             router.push("/signin")
-            // Sign-out successful.
         }).catch((error) => {
-            // An error happened.
         });
     }
 
@@ -26,11 +30,16 @@ const Profile = () => {
         <div className='flex flex-col items-center justify-center'>
             {user &&
                 <div className='w-full flex items-center justify-center flex-col'>
-                    <ProfileHeader user={user} />
-                    {/* <ManageMyResorts handleSignout={handleSignout} /> */}
+                    <ProfileHeader user={user}
+                        addResort={addResort} setAddResort={setAddResort}
+                        editProfile={editProfile} setEditProfile={setEditProfile}
+                        settings={settings} setSettings={setSettings}
+                    />
                 </div>
             }
-            <MyResorts />
+            {/* <ManageMyResorts handleSignout={handleSignout} /> */}
+            {addResort && <MyResorts />}
+            {settings && <Settings handleSignout={handleSignout} user={user} />}
         </div>
     )
 }
