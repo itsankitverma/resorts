@@ -39,7 +39,6 @@ export default function AddResort(props) {
             description: description,
             photo: profileImage
         });
-        console.log(docRef.id);
         const imageRef = ref(storage, `posts/${docRef.id}/${title}`);
         await uploadString(imageRef, selectedFile, "data_url").then(async () => {
             const downloadURL = await getDownloadURL(imageRef);
@@ -57,7 +56,7 @@ export default function AddResort(props) {
         })
         setSelectedFile(null)
     };
-    
+
     const handleSubmit = async () => {
         try {
             uploadPost()
