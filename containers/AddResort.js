@@ -10,8 +10,7 @@ export default function AddResort(props) {
 
     const [details, setDetails] = useState({
         title: "",
-        description: "",
-        photo: ""
+        description: ""
     })
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -59,7 +58,11 @@ export default function AddResort(props) {
 
     const handleSubmit = async () => {
         try {
-            uploadPost()
+            if (title === "" || description === "" || selectedFile === null) {
+                alert("Please enter all the details")
+            } else {
+                uploadPost()
+            }
         } catch (error) {
             console.log(error);
         }
@@ -67,12 +70,18 @@ export default function AddResort(props) {
 
     const upload = (e) => {
         const reader = new FileReader();
-        if (e.target.files[0]) {
-            reader.readAsDataURL(e.target.files[0]);
+        // 1048487
+        if (e.target.files[0].size < 1048487) {
+            if (e.target.files[0]) {
+                reader.readAsDataURL(e.target.files[0]);
+            }
+            reader.onload = (readerEvent) => {
+                setSelectedFile(readerEvent.target.result);
+            };
         }
-        reader.onload = (readerEvent) => {
-            setSelectedFile(readerEvent.target.result);
-        };
+        else {
+            alert("Please upload an image less than 1Mb")
+        }
     };
 
     return (
@@ -121,6 +130,7 @@ export default function AddResort(props) {
 
                                 />
                                 <p className="mt-2 text-sm text-gray-500">Write a few sentences about your resort..</p>
+                                <p className="mt-2 font-bold text-sm text-gray-500">Photo size must be less than 1mb</p>
                             </div>
                         </div>
 

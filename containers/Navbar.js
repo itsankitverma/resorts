@@ -5,7 +5,7 @@ import React from 'react'
 const Navbar = ({ user }) => {
   const router = useRouter()
   return (
-    <div className='w-full flex md:justify-evenly justify-between h-14 bg-gray-700 items-center text-white gap-20 px-8 md:px-0 sticky top-0'>
+    <div className='z-10 w-full flex md:justify-evenly justify-between h-14 bg-gray-700 items-center text-white gap-20 px-8 md:px-0 sticky top-0'>
       <p onClick={() => router.push('/')} className='font-bold cursor-pointer hidden md:block'>The Heaven</p>
       <p onClick={() => router.push('/')} className='font-bold cursor-pointer block md:hidden'>TH</p>
       {user ?

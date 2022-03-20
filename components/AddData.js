@@ -1,4 +1,3 @@
-import { getAuth, signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
@@ -7,7 +6,6 @@ import { db } from '../lib/firebase-config';
 import { doc, setDoc } from "firebase/firestore";
 
 const AddData = (props) => {
-    // console.log(props.uid);
     const route = useRouter()
     const [details, setDetails] = useState({
         email: "",

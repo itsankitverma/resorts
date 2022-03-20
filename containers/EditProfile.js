@@ -3,10 +3,9 @@ import { collection, doc, getDocs, query, setDoc, where } from "firebase/firesto
 import { useState } from "react"
 import { useEffect } from "react";
 import { db } from "../lib/firebase-config";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function EditProfile(props) {
-
-    const [getDetails, setGetDetails] = useState()
 
     const [details, setDetails] = useState({
         username: "",
@@ -26,10 +25,36 @@ export default function EditProfile(props) {
         setDetails({ ...details, [e.target.name]: e.target.value });
     }
 
+    const success = () => toast.success('Details Updated Successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
     const handleSubmit = async () => {
         try {
-            await setDoc(doc(db, `users/${props.user.uid}`), details);
-            console.log("saved")
+            if (username === "" || about === "" || city === "" || email === "" || firstName === "" || lastName === "" || state === "" || streetAddress === "" || zip === "") {
+                alert("Please Enter all details")
+            } else {
+                await setDoc(doc(db, `users/${props.user.uid}`), details);
+                success()
+                setDetails({
+                    username: "",
+                    about: "",
+                    firstName: "",
+                    lastName: "",
+                    email: props.user.email,
+                    streetAddress: "",
+                    city: "",
+                    state: "",
+                    zip: ""
+                })
+            }
+
         } catch (error) {
             console.log(error);
         }
@@ -301,6 +326,17 @@ export default function EditProfile(props) {
                     </button>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </form>
     )
 }

@@ -18,13 +18,15 @@ function MyApp({ Component, pageProps }) {
 
   const { user } = useFirebase()
   const router = useRouter()
+
   useEffect(() => {
     if (!user) {
       router.push("/signin")
     } else {
       router.push("/")
     }
-  }, [])
+  }, [user])
+
   return (
     <>
       <RecoilRoot>
