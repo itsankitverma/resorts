@@ -15,9 +15,9 @@ const ProfileHeader = (props) => {
                 </div>
             </div>
             <div className='flex flex-col md:flex-row md:gap-5 gap-2 items-center'>
-                <button onClick={() => { props.setAddResort(!props.addResort); props.setEditProfile(false); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg'>Add your Resort</button>
-                <button onClick={() => { props.setAddResort(false); props.setEditProfile(!props.editProfile); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg'> Edit Profile</button>
-                <AiOutlineSetting className='text-3xl cursor-pointer' onClick={() => { props.setAddResort(false); props.setEditProfile(false); props.setSettings(!props.settings) }} />
+                <button onClick={() => { props.setAddResort(!props.addResort); props.setEditProfile(false); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg w-40'>Add your Resort</button>
+                <button onClick={() => { props.setAddResort(false); props.setEditProfile(!props.editProfile); props.setSettings(false) }} className='px-3 py-2 bg-indigo-600 text-white rounded-lg w-40'> Edit Profile</button>
+                <AiOutlineSetting className='text-3xl cursor-pointer absolute top-16 right-3 md:relative md:top-0 md:right-0 ' onClick={() => { props.setAddResort(false); props.setEditProfile(false); props.setSettings(!props.settings) }} />
             </div>
         </div>
     )

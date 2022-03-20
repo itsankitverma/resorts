@@ -3,10 +3,9 @@ import { useRouter } from 'next/router'
 import { getAuth, signOut } from "firebase/auth";
 import useFirebase from '../lib/useFirebase';
 import ProfileHeader from '../components/ProfileHeader';
-import ManageMyResorts from '../containers/ManageMyResorts';
-import Settings from '../containers/Settings';
+import ManageMyResorts from '../containers/AddResort';
+import EditProfile from '../containers/EditProfile';
 import MyResorts from '../components/MyResorts';
-import { useEffect } from 'react';
 import { useState } from 'react';
 
 const Profile = () => {
@@ -26,6 +25,7 @@ const Profile = () => {
         });
     }
 
+
     return (
         <div className='flex flex-col items-center justify-center'>
             {user &&
@@ -37,9 +37,9 @@ const Profile = () => {
                     />
                 </div>
             }
-            {/* <ManageMyResorts handleSignout={handleSignout} /> */}
-            {addResort && <MyResorts />}
-            {settings && <Settings handleSignout={handleSignout} user={user} />}
+            {addResort && <ManageMyResorts handleSignout={handleSignout} user={user} />}
+            {/* <MyResorts /> */}
+            {editProfile && <EditProfile handleSignout={handleSignout} user={user} />}
         </div>
     )
 }
